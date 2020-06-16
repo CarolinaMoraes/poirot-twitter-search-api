@@ -11,10 +11,17 @@ const app = express();
 const port = process.env.PORT || "3000";
 
 
+/**
+ * Body parser
+ *  
+*/
+app.use(express.urlencoded({ extended: false }));
+
 
 /**
  * Routes Definitions
  */
+
 app.get("/conexao/:usuarioFonte/com/:usuarioAlvo", (req, res) => {
     const twitter = twitterClient.provideClient();
     twitter.get("/friendships/show", { source_screen_name: req.params.usuarioFonte, target_screen_name: req.params.usuarioAlvo }, (erro, data) => {
